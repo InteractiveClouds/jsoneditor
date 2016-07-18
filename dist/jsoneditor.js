@@ -8739,7 +8739,6 @@ return /******/ (function(modules) { // webpackBootstrap
 	treemode._onChange = function () {
 	  // validate JSON schema (if configured)
 	  this._debouncedValidate();
-
 	  // trigger the onChange callback
 	  if (this.options.onChange) {
 	    try {
@@ -9045,14 +9044,19 @@ return /******/ (function(modules) { // webpackBootstrap
 	  this.frame.onfocusout = onEvent; // for IE
 
 	  // create menu
+	  this.toolbar = document.createElement('md-toolbar');
+	  this.toolbar.className = 'dfx-je-toolbar md-altTheme-theme';
+	  this.frame.appendChild(this.toolbar);
 	  this.menu = document.createElement('div');
 	  this.menu.className = 'jsoneditor-menu';
-	  this.frame.appendChild(this.menu);
+	  this.toolbar.appendChild(this.menu);
 
 	  // create expand all button
 	  var expandAll = document.createElement('button');
 	  expandAll.className = 'jsoneditor-expand-all';
 	  expandAll.title = 'Expand all fields';
+	  expandAll.setAttribute('dfx-je-class', 'dfx-je-button');
+		expandAll.setAttribute('dfx-icon', 'format_line_spacing');
 	  expandAll.onclick = function () {
 	    editor.expandAll();
 	  };
@@ -9062,6 +9066,8 @@ return /******/ (function(modules) { // webpackBootstrap
 	  var collapseAll = document.createElement('button');
 	  collapseAll.title = 'Collapse all fields';
 	  collapseAll.className = 'jsoneditor-collapse-all';
+		collapseAll.setAttribute('dfx-je-class', 'dfx-je-button');
+		collapseAll.setAttribute('dfx-icon', 'vertical_align_center');
 	  collapseAll.onclick = function () {
 	    editor.collapseAll();
 	  };
@@ -9073,6 +9079,8 @@ return /******/ (function(modules) { // webpackBootstrap
 	    var undo = document.createElement('button');
 	    undo.className = 'jsoneditor-undo jsoneditor-separator';
 	    undo.title = 'Undo last action (Ctrl+Z)';
+	    undo.setAttribute('dfx-je-class', 'dfx-je-button');
+			undo.setAttribute('dfx-icon', 'undo');
 	    undo.onclick = function () {
 	      editor._onUndo();
 	    };
@@ -9083,6 +9091,8 @@ return /******/ (function(modules) { // webpackBootstrap
 	    var redo = document.createElement('button');
 	    redo.className = 'jsoneditor-redo';
 	    redo.title = 'Redo (Ctrl+Shift+Z)';
+	    redo.setAttribute('dfx-je-class', 'dfx-je-button');
+			redo.setAttribute('dfx-icon', 'redo');
 	    redo.onclick = function () {
 	      editor._onRedo();
 	    };
@@ -11194,6 +11204,8 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	  var refreshSearch = document.createElement('button');
 	  refreshSearch.className = 'jsoneditor-refresh';
+	  refreshSearch.setAttribute('dfx-je-class', 'dfx-je-button');
+		refreshSearch.setAttribute('dfx-icon', 'search');
 	  td = document.createElement('td');
 	  td.appendChild(refreshSearch);
 	  tr.appendChild(td);
@@ -11224,6 +11236,8 @@ return /******/ (function(modules) { // webpackBootstrap
 	  var searchNext = document.createElement('button');
 	  searchNext.title = 'Next result (Enter)';
 	  searchNext.className = 'jsoneditor-next';
+	  searchNext.setAttribute('dfx-je-class', 'dfx-je-button');
+		searchNext.setAttribute('dfx-icon', 'arrow_drop_down');
 	  searchNext.onclick = function () {
 	    searchBox.next();
 	  };
@@ -11234,6 +11248,8 @@ return /******/ (function(modules) { // webpackBootstrap
 	  var searchPrevious = document.createElement('button');
 	  searchPrevious.title = 'Previous result (Shift+Enter)';
 	  searchPrevious.className = 'jsoneditor-previous';
+	  searchPrevious.setAttribute('dfx-je-class', 'dfx-je-button');
+		searchPrevious.setAttribute('dfx-icon', 'arrow_drop_up');
 	  searchPrevious.onclick = function () {
 	    searchBox.previous();
 	  };
@@ -12351,6 +12367,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	  this.expanded = true;
 	  if (this.dom.expand) {
 	    this.dom.expand.className = 'jsoneditor-expanded';
+	    this.dom.expand.setAttribute('dfx-icon', 'keyboard_arrow_down');
 	  }
 
 	  this.showChilds();
@@ -12385,6 +12402,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	  // make this node collapsed
 	  if (this.dom.expand) {
 	    this.dom.expand.className = 'jsoneditor-collapsed';
+	    this.dom.expand.setAttribute('dfx-icon', 'keyboard_arrow_right');
 	  }
 	  this.expanded = false;
 	};
@@ -13410,6 +13428,8 @@ return /******/ (function(modules) { // webpackBootstrap
 	        dom.drag = domDrag;
 	        domDrag.className = 'jsoneditor-dragarea';
 	        domDrag.title = 'Drag to move this field (Alt+Shift+Arrows)';
+	        domDrag.setAttribute('dfx-je-class', 'dfx-je-button');
+					domDrag.setAttribute('dfx-icon', 'drag_handle');
 	        tdDrag.appendChild(domDrag);
 	      }
 	    }
@@ -13421,6 +13441,8 @@ return /******/ (function(modules) { // webpackBootstrap
 	    dom.menu = menu;
 	    menu.className = 'jsoneditor-contextmenu';
 	    menu.title = 'Click to open the actions menu (Ctrl+M)';
+	    menu.setAttribute('dfx-je-class', 'dfx-je-button');
+			menu.setAttribute('dfx-icon', 'menu');
 	    tdMenu.appendChild(dom.menu);
 	    dom.tr.appendChild(tdMenu);
 	  }
@@ -14047,6 +14069,8 @@ return /******/ (function(modules) { // webpackBootstrap
 	  var expand = document.createElement('button');
 	  if (this._hasChilds()) {
 	    expand.className = this.expanded ? 'jsoneditor-expanded' : 'jsoneditor-collapsed';
+	    expand.setAttribute('dfx-je-class', 'dfx-je-button');
+			expand.setAttribute('dfx-icon', this.expanded ? 'keyboard_arrow_down' : 'keyboard_arrow_right');
 	    expand.title =
 	        'Click to expand/collapse this field (Ctrl+E). \n' +
 	        'Ctrl+Click to expand/collapse including all childs.';
@@ -15559,6 +15583,8 @@ return /******/ (function(modules) { // webpackBootstrap
 	      var menu = document.createElement('button');
 	      menu.className = 'jsoneditor-contextmenu';
 	      menu.title = 'Click to open the actions menu (Ctrl+M)';
+	      menu.setAttribute('dfx-je-class', 'dfx-je-button');
+				menu.setAttribute('dfx-icon', 'menu');
 	      dom.menu = menu;
 	      tdMenu.appendChild(dom.menu);
 	    }
@@ -15948,14 +15974,19 @@ return /******/ (function(modules) { // webpackBootstrap
 	  };
 
 	  // create menu
+	  this.toolbar = document.createElement('md-toolbar');
+	  this.toolbar.className = 'dfx-je-toolbar md-altTheme-theme';
+	  this.frame.appendChild(this.toolbar);
 	  this.menu = document.createElement('div');
 	  this.menu.className = 'jsoneditor-menu';
-	  this.frame.appendChild(this.menu);
+	  this.toolbar.appendChild(this.menu);
 
 	  // create format button
 	  var buttonFormat = document.createElement('button');
 	  buttonFormat.className = 'jsoneditor-format';
 	  buttonFormat.title = 'Format JSON data, with proper indentation and line feeds (Ctrl+\\)';
+	  buttonFormat.setAttribute('dfx-je-class', 'dfx-je-button');
+	  buttonFormat.setAttribute('dfx-icon', 'wrap_text');
 	  this.menu.appendChild(buttonFormat);
 	  buttonFormat.onclick = function () {
 	    try {
@@ -15971,6 +16002,8 @@ return /******/ (function(modules) { // webpackBootstrap
 	  var buttonCompact = document.createElement('button');
 	  buttonCompact.className = 'jsoneditor-compact';
 	  buttonCompact.title = 'Compact JSON data, remove all whitespaces (Ctrl+Shift+\\)';
+	  buttonCompact.setAttribute('dfx-je-class', 'dfx-je-button');
+	  buttonCompact.setAttribute('dfx-icon', 'short_text');
 	  this.menu.appendChild(buttonCompact);
 	  buttonCompact.onclick = function () {
 	    try {
@@ -16030,18 +16063,18 @@ return /******/ (function(modules) { // webpackBootstrap
 	      });
 	    }
 
-	    var poweredBy = document.createElement('a');
-	    poweredBy.appendChild(document.createTextNode('powered by ace'));
-	    poweredBy.href = 'http://ace.ajax.org';
-	    poweredBy.target = '_blank';
-	    poweredBy.className = 'jsoneditor-poweredBy';
-	    poweredBy.onclick = function () {
-	      // TODO: this anchor falls below the margin of the content,
-	      // therefore the normal a.href does not work. We use a click event
-	      // for now, but this should be fixed.
-	      window.open(poweredBy.href, poweredBy.target);
-	    };
-	    this.menu.appendChild(poweredBy);
+	    // var poweredBy = document.createElement('a');
+	    // poweredBy.appendChild(document.createTextNode('powered by ace'));
+	    // poweredBy.href = 'http://ace.ajax.org';
+	    // poweredBy.target = '_blank';
+	    // poweredBy.className = 'jsoneditor-poweredBy';
+	    // poweredBy.onclick = function () {
+	    //   // TODO: this anchor falls below the margin of the content,
+	    //   // therefore the normal a.href does not work. We use a click event
+	    //   // for now, but this should be fixed.
+	    //   window.open(poweredBy.href, poweredBy.target);
+	    // };
+	    // this.menu.appendChild(poweredBy);
 
 	    // register onchange event
 	    aceEditor.on('change', this._onChange.bind(this));
